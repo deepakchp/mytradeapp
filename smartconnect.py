@@ -17,8 +17,12 @@ def get_historical_data(symbol,start_date):
     df.index = pd.to_datetime(df.index)
     return df
 
-tsla = get_historical_data('TCS', '2020-01-01')
+tsla = get_historical_data('TSLA', '2020-01-01')
 
+with pd.option_context('display.max_rows', None,
+                       'display.max_columns', None,
+                       'display.precision', 3,
+                       ):
     print(tsla)
 
 
