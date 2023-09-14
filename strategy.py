@@ -32,4 +32,4 @@ def implement_st_strategy(prices, st):
             
     return buy_price, sell_price, st_signal
 
-buy_price, sell_price, st_signal = implement_st_strategy(tsla['close'], tsla['st'])
+
