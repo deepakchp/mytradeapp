@@ -1,3 +1,5 @@
+
+import numpy as np
 def implement_st_strategy(prices, st):
     buy_price = []
     sell_price = []

@@ -1,12 +1,5 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-from math import floor
-from termcolor import colored as cl
-
-plt.style.use('fivethirtyeight')
-plt.rcParams['figure.figsize'] = (20,10)
-
 
 	
 def get_supertrend(high,low,close,lookback,multiplier):

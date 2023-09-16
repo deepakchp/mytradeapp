@@ -9,3 +9,5 @@ def get_historical_data(symbol,start_date):
     df = df[df.index >= start_date]
     df.index = pd.to_datetime(df.index)
     return df
+
+tsla = get_historical_data('TSLA', '2015-01-01')
