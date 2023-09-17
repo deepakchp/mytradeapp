@@ -9,31 +9,35 @@ import matplotlib.pyplot as plt
 plt.style.use('fivethirtyeight')
 plt.rcParams['figure.figsize'] = (20,10)
 
-#tsla = get_historical_data('TSLA', '2015-01-01')
-tsla = get_historical_data()
-tsla['st'], tsla['s_upt'], tsla['st_dt'] = get_supertrend(tsla['high'], tsla['low'], tsla['close'], 10, 3)
-tsla = tsla[1:]
-print(tsla.head())
+symbol_token="11536"
+start_date="2022-01-01 00:00"
+end_date="2023-01-01 00:00"
+period="ONE_DAY"
 
-#plt.plot(tsla['close'], linewidth = 2, label = 'CLOSING PRICE')
-#plt.plot(tsla['st'], color = 'green', linewidth = 2, label = 'ST UPTREND 10,3')
-#plt.plot(tsla['st_dt'], color = 'r', linewidth = 2, label = 'ST DOWNTREND 10,3')
+data = get_historical_data(symbol_token,start_date,end_date,period)
+data['st'], data['s_upt'], data['st_dt'] = get_supertrend(data['high'], data['low'], data['close'], 10, 3)
+data = data[1:]
+print(data.head())
+
+#plt.plot(data['close'], linewidth = 2, label = 'CLOSING PRICE')
+#plt.plot(data['st'], color = 'green', linewidth = 2, label = 'ST UPTREND 10,3')
+#plt.plot(data['st_dt'], color = 'r', linewidth = 2, label = 'ST DOWNTREND 10,3')
 #plt.legend(loc = 'upper left')
 #plt.show()
 
-buy_price, sell_price, st_signal = implement_st_strategy(tsla['close'], tsla['st'])
+buy_price, sell_price, st_signal = implement_st_strategy(data['close'], data['st'])
 
-strategy = get_position(tsla,st_signal)
+strategy = get_position(data,st_signal)
 strategy.head()
-print(strategy[20:25])
+#print(strategy)
 
-get_backtest(tsla,strategy)
+get_backtest(data,strategy)
 
-plt.plot(tsla['close'], linewidth = 2)
-plt.plot(tsla['st'], color = 'green', linewidth = 2, label = 'ST UPTREND')
-plt.plot(tsla['st_dt'], color = 'r', linewidth = 2, label = 'ST DOWNTREND')
-plt.plot(tsla.index, buy_price, marker = '^', color = 'green', markersize = 12, linewidth = 0, label = 'BUY SIGNAL')
-plt.plot(tsla.index, sell_price, marker = 'v', color = 'r', markersize = 12, linewidth = 0, label = 'SELL SIGNAL')
-plt.title('TSLA ST TRADING SIGNALS')
+plt.plot(data['close'], linewidth = 2)
+plt.plot(data['st'], color = 'green', linewidth = 2, label = 'ST UPTREND')
+plt.plot(data['st_dt'], color = 'r', linewidth = 2, label = 'ST DOWNTREND')
+plt.plot(data.index, buy_price, marker = '^', color = 'green', markersize = 12, linewidth = 0, label = 'BUY SIGNAL')
+plt.plot(data.index, sell_price, marker = 'v', color = 'r', markersize = 12, linewidth = 0, label = 'SELL SIGNAL')
+plt.title('data ST TRADING SIGNALS')
 plt.legend(loc = 'upper left')
 plt.show()

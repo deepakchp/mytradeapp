@@ -4,7 +4,7 @@ import pandas as pd
 
 
 
-def get_historical_data():
+def get_historical_data(symbol_token,start_date,end_date,period):
     api_key = 'mqIs2kuD'
     clientId = 'D133990'
     pwd = '1985'
@@ -26,13 +26,14 @@ def get_historical_data():
     try:
         historicParam={
             "exchange": "NSE",
-            "symboltoken": "8479",
-            "interval": "ONE_DAY",
-            "fromdate": "2020-01-01 00:00", 
-            "todate": "2023-01-01 00:00"
+            "symboltoken": symbol_token,
+            "interval": period,
+            "fromdate": start_date, 
+            "todate": end_date
         }
         data = smartApi.getCandleData(historicParam)
-        df = pd.DataFrame(data['data'],columns=['datetime','open', 'high','low','close','volume']).iloc[::-1].set_index('datetime').astype(float)
+        #df = pd.DataFrame(data['data'],columns=['datetime','open', 'high','low','close','volume']).iloc[::-1].set_index('datetime').astype(float)
+        df = pd.DataFrame(data['data'],columns=['datetime','open', 'high','low','close','volume']).set_index('datetime').astype(float)
         df.index = pd.to_datetime(df.index)
         return df
     except Exception as e:
