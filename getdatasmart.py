@@ -5,11 +5,11 @@ import pandas as pd
 
 
 def get_historical_data(symbol_token,start_date,end_date,period):
-    api_key = 'mqIs2kuD'
-    clientId = 'D133990'
-    pwd = '1985'
+    api_key = ''
+    clientId = ''
+    pwd = ''
     smartApi = SmartConnect(api_key)
-    token = "Z6J3K6ON5ADK6MUDGPXZ3LSM2I"
+    token = ""
     totp=pyotp.TOTP(token).now()
     correlation_id = "abc123"
 
